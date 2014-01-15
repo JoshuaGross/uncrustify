@@ -1671,7 +1671,7 @@ static void fix_casts(chunk_t *start)
       {
          detail = " -- upper case";
       }
-      else if (cpd.lang_flags & LANG_OC && chunk_is_str(last, "id", 2))
+      else if ((cpd.lang_flags & LANG_OC) && chunk_is_str(last, "id", 2))
       {
          detail = " -- Objective-C id";
       }
