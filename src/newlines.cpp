@@ -11,6 +11,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <algorithm>
 #include <cerrno>
 #include "unc_ctype.h"
 
@@ -2154,6 +2155,24 @@ void newlines_cleanup_braces(bool first)
             }
          }
 
+         if (cpd.settings[UO_nl_brace_square].a != AV_IGNORE)
+         {
+            next = chunk_get_next_nc(pc, CNAV_PREPROC);
+            if ((next != NULL) && (next->type == CT_SQUARE_CLOSE))
+            {
+               newline_iarf_pair(pc, next, cpd.settings[UO_nl_brace_square].a);
+            }
+         }
+
+         if (cpd.settings[UO_nl_brace_fparen].a != AV_IGNORE)
+         {
+            next = chunk_get_next_nc(pc, CNAV_PREPROC);
+            if ((next != NULL) && (next->type == CT_FPAREN_CLOSE))
+            {
+               newline_iarf_pair(pc, next, cpd.settings[UO_nl_brace_fparen].a);
+            }
+         }
+
          if (cpd.settings[UO_eat_blanks_before_close_brace].b)
          {
             /* Limit the newlines before the close brace to 1 */
@@ -2210,6 +2229,8 @@ void newlines_cleanup_braces(bool first)
             if ((next != NULL) &&
                 (next->type != CT_SEMICOLON) &&
                 (next->type != CT_COMMA) &&
+                (next->type != CT_SQUARE_CLOSE) &&
+                (next->type != CT_FPAREN_CLOSE) &&
                 ((pc->flags & (PCF_IN_ARRAY_ASSIGN | PCF_IN_TYPEDEF)) == 0) &&
                 !chunk_is_newline(next) &&
                 !chunk_is_comment(next))

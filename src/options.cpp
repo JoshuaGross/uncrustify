@@ -782,6 +782,10 @@ void register_options(void)
                   "Add or remove newline between 'catch' and '{'");
    unc_add_option("nl_brace_catch", UO_nl_brace_catch, AT_IARF,
                   "Add or remove newline between '}' and 'catch'");
+   unc_add_option("nl_brace_square", UO_nl_brace_square, AT_IARF,
+                  "Add or remove newline between '}' and ']'");
+   unc_add_option("nl_brace_fparen", UO_nl_brace_fparen, AT_IARF,
+                  "Add or remove newline between '}' and ')' in a function invocation");
    unc_add_option("nl_while_brace", UO_nl_while_brace, AT_IARF,
                   "Add or remove newline between 'while' and '{'");
    unc_add_option("nl_scope_brace", UO_nl_scope_brace, AT_IARF,
@@ -1215,7 +1219,7 @@ void register_options(void)
                   "The filename that contains text to insert before a class if the class isn't preceded with a C/C++ comment.\n"
                   "Will substitute $(class) with the class name.");
    unc_add_option("cmt_insert_oc_msg_header", UO_cmt_insert_oc_msg_header, AT_STRING,
-                  "The filename that contains text to insert before a Obj-C message specification if the method isn't preceeded with a C/C++ comment.\n"
+                  "The filename that contains text to insert before a Obj-C message specification if the method isn't preceded with a C/C++ comment.\n"
                   "Will substitute $(message) with the function name and $(javaparam) with the javadoc @param and @return stuff.");
    unc_add_option("cmt_insert_before_preproc", UO_cmt_insert_before_preproc, AT_BOOL,
                   "If a preprocessor is encountered when stepping backwards from a function name, then\n"
